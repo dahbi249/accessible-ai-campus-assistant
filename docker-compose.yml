@@ -1,0 +1,16 @@
+services:
+    db:
+        image: pgvector/pgvector:pg16
+        container_name: campus_postgres
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: accessible_ai_campus
+            POSTGRES_USER: campus_user
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        ports:
+            - "5432:5432"
+        volumes:
+            - campus_db_data:/var/lib/postgresql/data
+
+volumes:
+    campus_db_data:
