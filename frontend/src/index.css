@@ -1,0 +1,268 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: "Plus Jakarta Sans", "Cairo", "IBM Plex Sans Arabic", system-ui, -apple-system, sans-serif;
+    --font-arabic: "Cairo", "IBM Plex Sans Arabic", "Plus Jakarta Sans", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background-color: #0e0e0e;
+    color: #f4f4f5;
+    color-scheme: dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html[lang="ar"] {
+    font-family: var(--font-arabic);
+  }
+
+  *:focus-visible {
+    outline: 2px solid #10b981;
+    outline-offset: 2px;
+  }
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+@keyframes typing-dot-bounce {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.typing-dot {
+  animation: typing-dot-bounce 1.2s ease-in-out infinite;
+}
+
+.typing-dot-delay-1 {
+  animation-delay: 0.15s;
+}
+
+.typing-dot-delay-2 {
+  animation-delay: 0.3s;
+}
+
+/* Custom dark scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2e2e32;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #404047;
+}
+
+/* Leaflet dark-mode surface & tile integration */
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: #121212;
+  z-index: 0;
+}
+
+html[lang="ar"] .leaflet-container {
+  font-family: var(--font-arabic);
+}
+
+.campus-dark-tiles .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(92%) contrast(88%);
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #171717;
+  color: #f4f4f5;
+  border: 1px solid #262626;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 10px;
+}
+
+.leaflet-popup-close-button {
+  color: #a3a3a3 !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #ffffff !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: #171717 !important;
+  color: #e5e5e5 !important;
+  border-color: #262626 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #262626 !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(18, 18, 18, 0.85) !important;
+  color: #a3a3a3 !important;
+}
+
+.leaflet-control-attribution a {
+  color: #34d399 !important;
+}
+
+/* KaTeX dark mode contrast adjustments */
+.katex-display {
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
+.katex {
+  color: #f4f4f5;
+  font-size: 1.02em;
+}
+
+/* High-contrast accessibility mode */
+html.high-contrast,
+html.high-contrast body {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+html.high-contrast .border-neutral-800,
+html.high-contrast .border-neutral-800\/80,
+html.high-contrast .border-white\/10 {
+  border-color: #52525b !important;
+}
+
+html.high-contrast .text-neutral-400,
+html.high-contrast .text-neutral-500 {
+  color: #d4d4d8 !important;
+}
+
+html.high-contrast .campus-dark-tiles .leaflet-tile-pane {
+  filter: invert(100%) hue-rotate(180deg) brightness(106%) contrast(118%);
+}
+
+html.high-contrast *:focus-visible {
+  outline: 2.5px solid #34d399;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print-friendly checklists & verified notices (black-on-white for Scolarité) */
+@media print {
+  @page {
+    margin: 15mm;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    color-scheme: light !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  header,
+  footer,
+  aside,
+  nav,
+  form,
+  .no-print {
+    display: none !important;
+  }
+
+  main,
+  #main-content,
+  section,
+  article,
+  div {
+    overflow: visible !important;
+    max-height: none !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+
+  .print-container {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #d4d4d8 !important;
+  }
+
+  .print-message-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #d4d4d8 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    break-inside: avoid-page;
+  }
+
+  .print-message-card *,
+  .print-container * {
+    color: #000000 !important;
+  }
+
+  .print-message-card pre,
+  .print-message-card code {
+    background: #f4f4f5 !important;
+    border-color: #d4d4d8 !important;
+    color: #18181b !important;
+  }
+
+  .print-message-card table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .print-message-card th,
+  .print-message-card td {
+    border: 1px solid #a1a1aa !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .print-message-card th {
+    background: #f4f4f5 !important;
+    font-weight: 700 !important;
+  }
+
+  .katex,
+  .katex * {
+    color: #000000 !important;
+  }
+}
+
